@@ -1,46 +1,50 @@
 class Hero {
-  int strength = 3;
-  int stamina = 4;
-  int charisma = 5;
+  int strength;
+  int stamina;
+  int charisma;
 
-  void calculateRating() {}
+  Hero(this.strength, this.stamina, this.charisma);
+
+  double calculteRating(double factor) {
+    return (((strength + stamina + charisma) / 3) * factor);
+  }
 }
 
 class DCHero extends Hero {
-  String name = "SuperMan";
-  double factor = 0.75;
-  bool canFly = true;
-  void showRating() {
-    ((strength + stamina + charisma) / 3) * factor;
+  String name;
+  double factor;
+  bool canFly;
+  DCHero(this.name, this.factor, this.canFly) : super(3, 4, 5);
+
+  void info() {
+    print("Name: $name\nFactor: $factor\nCan Fly: $canFly\n");
   }
 
-  void dcinfo() {
-    print(this.name);
-    print(this.factor);
-    print(this.canFly);
+  void showRating() {
+    print("$name Rating: ${calculteRating(factor)}");
   }
 }
 
 class MarvelHero extends Hero {
-  String name = "IronMan";
-  double factor = 0.82;
-  void showRating() {
-    ((strength + stamina + charisma) / 3) * factor;
+  String name;
+  double factor;
+  MarvelHero(this.name, this.factor) : super(3, 4, 5);
+
+  void info() {
+    print("Name: $name\nFactor: $factor\n");
   }
 
-  void marvelinfo() {
-    print(this.name);
-    print(this.factor);
+  void showRating() {
+    print("$name Rating: ${calculteRating(factor)}");
   }
 }
 
 main(List<String> args) {
-  var dcinfo = DCHero();
+  DCHero dcHero = DCHero("Super Man", 0.75, true);
+  dcHero.info();
+  MarvelHero marvelHero = MarvelHero("Iron Man", 0.82);
+  marvelHero.info();
 
-  var marvelinfo = MarvelHero();
-
-  dcinfo.dcinfo();
-  dcinfo.showRating();
-  marvelinfo.marvelinfo();
-  marvelinfo.showRating();
+  dcHero.showRating();
+  marvelHero.showRating();
 }
